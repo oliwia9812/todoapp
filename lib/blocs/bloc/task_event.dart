@@ -10,19 +10,19 @@ abstract class TaskEvent extends Equatable {
 class GetTasks extends TaskEvent {}
 
 class AddTask extends TaskEvent {
-  TaskModel task;
+  final TaskModel task;
 
-  AddTask({required this.task});
+  const AddTask({required this.task});
 }
 
 class UpdateTask extends TaskEvent {
-  int taskId;
+  final TaskModel task;
 
-  UpdateTask({required this.taskId});
+  const UpdateTask({required this.task});
 }
 
 class RemoveTask extends TaskEvent {
-  int taskId;
+  final int taskId;
 
-  RemoveTask({required this.taskId});
+  const RemoveTask({required this.taskId});
 }

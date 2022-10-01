@@ -1,27 +1,15 @@
 import 'package:equatable/equatable.dart';
 
-class TaskModel extends Equatable {
-  TaskModel({
+class Task extends Equatable {
+  Task({
     this.id,
     required this.isCompleted,
     required this.taskName,
   });
 
   final int? id;
-  bool isCompleted;
+  int isCompleted;
   final String taskName;
-
-  TaskModel copyWith({
-    int? id,
-    bool? isCompleted,
-    String? taskName,
-  }) {
-    return TaskModel(
-      id: id ?? this.id,
-      isCompleted: isCompleted ?? this.isCompleted,
-      taskName: taskName ?? this.taskName,
-    );
-  }
 
   Map<String, dynamic> toMap() {
     return {

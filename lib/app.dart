@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todoapp/models/task_model.dart';
 import 'package:todoapp/styles/app_colors.dart';
 import 'package:todoapp/ui/screens/intro/intro_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
           unselectedWidgetColor: AppColors.lightGray,
         ),
         debugShowCheckedModeBanner: false,
-        home: IntroScreen(),
+        home: const IntroScreen(),
       ),
     );
   }

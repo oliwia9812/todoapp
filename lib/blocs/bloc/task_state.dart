@@ -10,7 +10,7 @@ abstract class TaskState extends Equatable {
 class TaskLoading extends TaskState {}
 
 class TaskLoaded extends TaskState {
-  List<TaskModel> tasksList;
+  final List<TaskModel> tasksList;
 
-  TaskLoaded({required this.tasksList});
+  const TaskLoaded({required this.tasksList});
 }

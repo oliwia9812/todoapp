@@ -1,5 +1,3 @@
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:todoapp/blocs/bloc_exports.dart';
 import 'package:todoapp/models/task_model.dart';
@@ -55,7 +53,7 @@ class TasksList extends StatelessWidget {
                   activeColor: AppColors.blue,
                   onChanged: (value) {
                     BlocProvider.of<TaskBloc>(context).add(
-                      UpdateTask(taskId: index),
+                      UpdateTask(task: task),
                     );
                   },
                   value: task.isCompleted,
@@ -63,7 +61,10 @@ class TasksList extends StatelessWidget {
               ),
             ),
             onDismissed: (direction) {
-              BlocProvider.of<TaskBloc>(context).add(RemoveTask(taskId: index));
+              int? id = task.id;
+              if (id != null) {
+                BlocProvider.of<TaskBloc>(context).add(RemoveTask(taskId: id));
+              }
             },
           );
         }),
