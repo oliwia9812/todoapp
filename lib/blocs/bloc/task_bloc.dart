@@ -9,21 +9,32 @@ part 'task_event.dart';
 part 'task_state.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
-  final db = DatabaseHelper();
+  final DatabaseHelper db;
 
-  TaskBloc() : super(TaskLoading()) {
+  TaskBloc({required this.db}) : super(TasksLoading()) {
     on<GetTasks>((event, emit) async {
-      List<Task> tasks = await db.getTasks();
+      List<Task> allTasks = await db.getTasks();
+      List<Task> completedTasks =
+          allTasks.where((element) => element.isCompleted == 1).toList();
+      List<Task> uncompletedTasks =
+          allTasks.where((element) => element.isCompleted == 0).toList();
+
+      List<Task> tasksList = [...uncompletedTasks, ...completedTasks];
+
+      if (tasksList.isEmpty) {
+        emit(TasksEmpty());
+        return;
+      }
 
       emit(
-        TaskLoaded(
-          tasksList: tasks.mapToListTaskModel(),
+        TasksLoaded(
+          tasksList: tasksList.mapToListTaskModel(),
         ),
       );
     });
 
     on<AddTask>((event, emit) async {
-      emit(TaskLoading());
+      emit(TasksLoading());
 
       Task task = event.task.mapToTask();
       await db.insertTask(task);
@@ -32,7 +43,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     });
 
     on<UpdateTask>((event, emit) async {
-      emit(TaskLoading());
+      emit(TasksLoading());
 
       TaskModel updatedTask =
           event.task.copyWith(isCompleted: !event.task.isCompleted);
