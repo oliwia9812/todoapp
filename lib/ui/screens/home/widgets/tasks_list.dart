@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todoapp/blocs/bloc_exports.dart';
 import 'package:todoapp/models/task_model.dart';
 import 'package:todoapp/styles/app_colors.dart';
+import 'package:todoapp/styles/app_icons.dart';
 
 class TasksList extends StatelessWidget {
   final List<TaskModel> tasks;
@@ -25,7 +26,7 @@ class TasksList extends StatelessWidget {
               child: const Align(
                   alignment: Alignment.centerRight,
                   child: Icon(
-                    Icons.delete,
+                    AppIcons.trash,
                     color: AppColors.white,
                   )),
             ),

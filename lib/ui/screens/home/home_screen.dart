@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todoapp/models/task_model.dart';
 import 'package:todoapp/styles/app_colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:todoapp/styles/app_icons.dart';
 import 'package:todoapp/styles/text_styles/app_text_styles.dart';
 import 'package:todoapp/ui/screens/home/widgets/tasks_list.dart';
 import 'package:todoapp/ui/widgets/cutom_button.dart';
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
           floatingActionButton: FloatingActionButton(
             backgroundColor: AppColors.blue,
             onPressed: _buildShowModalBottom,
-            child: const Icon(Icons.add),
+            child: const Icon(AppIcons.add),
           ),
           body: SafeArea(
             minimum:
