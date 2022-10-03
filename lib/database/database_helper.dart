@@ -17,7 +17,6 @@ class DatabaseHelper {
   Future<Database> get database async {
     WidgetsFlutterBinding.ensureInitialized();
     print(await getDatabasesPath());
-
     return openDatabase(
       join(await getDatabasesPath(), _databaseName),
       version: _databaseVersion,
@@ -28,6 +27,14 @@ class DatabaseHelper {
   Future _onCreate(Database db, int version) async {
     await db.execute('''
           CREATE TABLE $table (
+            $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
+            $columnName TEXT,
+            $columnIsCompleted INTEGER
+          )
+          ''');
+
+    await db.execute('''
+          CREATE TABLE 'categories' (
             $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
             $columnName TEXT,
             $columnIsCompleted INTEGER

@@ -10,6 +10,7 @@ part 'task_state.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   final DatabaseHelper db;
+  int tasksNumbers = 0;
 
   TaskBloc({required this.db}) : super(TasksLoading()) {
     on<GetTasks>((event, emit) async {
@@ -22,9 +23,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       List<Task> tasksList = [...uncompletedTasks, ...completedTasks];
 
       if (tasksList.isEmpty) {
+        tasksNumbers = 0;
         emit(TasksEmpty());
         return;
       }
+
+      tasksNumbers = tasksList.length;
 
       emit(
         TasksLoaded(
@@ -55,6 +59,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     });
 
     on<RemoveTask>((event, emit) async {
+      emit(TasksLoading());
       await db.deleteTask(event.taskId);
 
       add(GetTasks());

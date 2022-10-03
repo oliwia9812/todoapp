@@ -39,7 +39,7 @@ class IntroScreen extends StatelessWidget {
                         children: [
                           Text(
                             'Organize your life',
-                            style: AppTextStyles.title(),
+                            style: AppTextStyles.title(color: AppColors.white),
                           ),
                           const SizedBox(
                             height: 24.0,

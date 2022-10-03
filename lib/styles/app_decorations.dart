@@ -13,4 +13,24 @@ class AppDecorations {
       ),
     );
   }
+
+  static InputDecoration formField() {
+    return const InputDecoration(
+      enabledBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: AppColors.lightGray),
+      ),
+      focusedBorder: UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: AppColors.blue,
+        ),
+      ),
+    );
+  }
+
+  static BoxDecoration calendarCard() {
+    return BoxDecoration(
+      borderRadius: BorderRadius.circular(16.0),
+      color: AppColors.gray,
+    );
+  }
 }
