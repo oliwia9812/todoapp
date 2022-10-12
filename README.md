@@ -9,7 +9,24 @@
 
 https://user-images.githubusercontent.com/101331206/195329452-0df155cc-d797-4a03-8139-c50032ded0b1.mov
 
-# App
+
+## Library:
+  * cupertino_icons
+  * flutter_svg
+  * google_fonts
+  * bloc
+  * flutter_bloc
+  * equatable
+  * uuid
+  * flutter_launcher_icons
+  * path
+  * sqflite
+  * get_it
+  * intl
+  * flutter_switch
+
+
+# App Screenshots
 
 ## Dark/Light theme
 
