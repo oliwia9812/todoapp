@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todoapp/bloc_observer.dart';
 import 'package:todoapp/database/database_helper.dart';
 import 'package:todoapp/injector.dart';
-import 'package:todoapp/styles/app_colors.dart';
-import 'package:todoapp/ui/screens/intro/intro_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
-
+import 'package:todoapp/presentation/screens/intro/intro_screen.dart';
+import 'package:todoapp/styles/app_themes.dart';
 import 'blocs/bloc_exports.dart';
 
 class MyApp extends StatelessWidget {
@@ -12,15 +11,42 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => TaskBloc(db: Injector().get<DatabaseHelper>()),
-      child: MaterialApp(
-        theme: ThemeData(
-          textTheme: GoogleFonts.montserratTextTheme(),
-          unselectedWidgetColor: AppColors.lightGray,
+    Bloc.observer = SimpleBlocObserver();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CategoryBloc>(
+          create: (BuildContext context) =>
+              CategoryBloc(db: Injector().get<DatabaseHelper>())
+                ..add(GetCategories()),
         ),
-        debugShowCheckedModeBanner: false,
-        home: const IntroScreen(),
+        BlocProvider<TaskBloc>(
+          create: (BuildContext context) => TaskBloc(
+              db: Injector().get<DatabaseHelper>(),
+              categoryBloc: BlocProvider.of<CategoryBloc>(context))
+            ..add(
+              const GetTasks(),
+            ),
+        ),
+        BlocProvider<ThemeBloc>(
+          create: (BuildContext context) => ThemeBloc(),
+        ),
+      ],
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, state) {
+          if (state is ThemeChanged) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: const IntroScreen(),
+              theme: state.theme,
+            );
+          } else {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: const IntroScreen(),
+              theme: AppThemes.darkTheme,
+            );
+          }
+        },
       ),
     );
   }

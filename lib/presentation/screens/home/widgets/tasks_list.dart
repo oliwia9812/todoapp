@@ -3,6 +3,7 @@ import 'package:todoapp/blocs/bloc_exports.dart';
 import 'package:todoapp/models/task_model.dart';
 import 'package:todoapp/styles/app_colors.dart';
 import 'package:todoapp/styles/app_icons.dart';
+import 'package:todoapp/styles/text_styles/app_text_styles.dart';
 
 class TasksList extends StatelessWidget {
   final List<TaskModel> tasks;
@@ -11,7 +12,6 @@ class TasksList extends StatelessWidget {
     required this.tasks,
     super.key,
   });
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -35,14 +35,9 @@ class TasksList extends StatelessWidget {
               visualDensity: const VisualDensity(vertical: -1),
               horizontalTitleGap: 0.0,
               contentPadding: EdgeInsets.zero,
-              textColor:
-                  task.isCompleted ? AppColors.lightGray : AppColors.white,
               title: Text(
                 task.taskName,
-                style: TextStyle(
-                  decoration:
-                      task.isCompleted ? TextDecoration.lineThrough : null,
-                ),
+                style: AppTextStyles.task(task.isCompleted, context),
               ),
               leading: SizedBox(
                 height: 24.0,
@@ -51,7 +46,7 @@ class TasksList extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(3.0),
                   ),
-                  activeColor: AppColors.blue,
+                  activeColor: Theme.of(context).colorScheme.primary,
                   onChanged: (value) {
                     BlocProvider.of<TaskBloc>(context).add(
                       UpdateTask(task: task),

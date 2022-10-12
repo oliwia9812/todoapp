@@ -4,7 +4,6 @@ class DataUtil {
   static String getDataFormat(DateTime date) {
     final month = DateFormat.LLLL().format(date);
     final dayNum = date.day;
-    // final year = DateFormat.y().format(date);
     final year = date.year;
 
     return '$dayNum $month $year';

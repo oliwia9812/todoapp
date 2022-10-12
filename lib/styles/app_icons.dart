@@ -11,7 +11,16 @@
 ///      fonts:
 ///       - asset: fonts/MyFlutterApp.ttf
 ///
-
+///
+/// * Material Design Icons, Copyright (C) Google, Inc
+///         Author:    Google
+///         License:   Apache 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+///         Homepage:  https://design.google.com/icons/
+/// * Font Awesome 4, Copyright (C) 2016 by Dave Gandy
+///         Author:    Dave Gandy
+///         License:   SIL ()
+///         Homepage:  http://fortawesome.github.com/Font-Awesome/
+///
 import 'package:flutter/widgets.dart';
 
 class AppIcons {
@@ -22,6 +31,14 @@ class AppIcons {
 
   static const IconData add =
       IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData close =
+      IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData today =
+      IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData calendar =
+      IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData nextDay =
+      IconData(0xf133, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData trash =
       IconData(0xf1f8, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
